@@ -1,6 +1,6 @@
 # Steam License Cleanup Button
 
-![Version](https://img.shields.io/badge/version-1.4-blue)
+![Version](https://img.shields.io/badge/version-1.0-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Tampermonkey](https://img.shields.io/badge/compatible-Tampermonkey-brightgreen)
 ![Greasemonkey](https://img.shields.io/badge/compatible-Greasemonkey-brightgreen)
