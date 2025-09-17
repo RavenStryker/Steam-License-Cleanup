@@ -131,3 +131,4 @@ Yes. The script is open-source and runs entirely within your browser. It does no
 ### ❤️ Credits
 -   @retvil
 -   @TCNOco
+-   @RavenStryker
