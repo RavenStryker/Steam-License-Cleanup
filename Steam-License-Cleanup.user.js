@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Steam License Cleanup
 // @namespace    https://github.com/PatrickJnr/Steam-License-Cleanup/
-// @version      1.6
-// @description  Scans all license pages and allows interactive review before removing licenses based on keywords or date ranges. Features exclusion list, pagination handling, progress bar, rate-limit handling, persistent settings, summary modal with export, and cancellation.
+// @version      1.7
+// @description  Scans all license pages and allows interactive review before removing licenses based on keywords or date ranges. Features exclusion list, pagination handling, progress bar with detailed feedback, rate-limit handling, persistent settings, summary modal with export, and cancellation.
 // @author       PatrickJnr (Enhanced by Gemini)
 // @match        https://store.steampowered.com/account/licenses*
 // @grant        none
@@ -365,8 +365,11 @@
                 state.removedDetails.push(license.details);
                 // Wait for the configured delay before proceeding
                 if (i + 1 < licensesToRemove.length) {
+                    const totalCount = licensesToRemove.length;
+                    const removedCount = state.removedDetails.length; // This will be i + 1
                     const delayInSeconds = state.settings.removalDelay / 1000;
-                    updateProgressBar(progressBar, statusText, progress, `Success. Waiting ${delayInSeconds}s before next removal...`);
+                    const statusMessage = `Removed ${removedCount} of ${totalCount}. Waiting ${delayInSeconds}s for next removal...`;
+                    updateProgressBar(progressBar, statusText, progress, statusMessage);
                     await new Promise(resolve => setTimeout(resolve, state.settings.removalDelay));
                 }
                 removeNextPackage(licensesToRemove, i + 1, progressBar, statusText); // Next package
@@ -467,6 +470,8 @@
     const showInfoModal = (title, message) => {
         showModal(title, `<p>${message}</p>`, []);
     };
+
+
 
     const showWorkingModal = (title, initialMessage) => {
         const content = `<p>${initialMessage}</p><p id="working-status" style="font-weight: bold; text-align: center; margin-top: 15px;"></p>`;
